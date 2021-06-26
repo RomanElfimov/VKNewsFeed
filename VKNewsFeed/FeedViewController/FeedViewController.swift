@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  FeedViewController.swift
 //  VKNewsFeed
 //
 //  Created by Роман Елфимов on 26.06.2021.
@@ -7,13 +7,15 @@
 
 import UIKit
 
-class AuthViewController: UIViewController {
+class FeedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
 
+        view.backgroundColor = .blue
+    }
+    
+
+  
 
 }
-
