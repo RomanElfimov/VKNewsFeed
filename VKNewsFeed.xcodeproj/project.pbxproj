@@ -3,24 +3,28 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C3153FEFAD36F680E0061F1 /* Pods_VKNewsFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF21063D6212C622CD8B47E8 /* Pods_VKNewsFeed.framework */; };
+		E951D3C226879664003C883A /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E951D3C126879664003C883A /* AuthenticationService.swift */; };
 		E97273CA26876F13003D010C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97273C926876F13003D010C /* AppDelegate.swift */; };
 		E97273CC26876F13003D010C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97273CB26876F13003D010C /* SceneDelegate.swift */; };
-		E97273CE26876F13003D010C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97273CD26876F13003D010C /* ViewController.swift */; };
-		E97273D126876F13003D010C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E97273CF26876F13003D010C /* Main.storyboard */; };
+		E97273CE26876F13003D010C /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97273CD26876F13003D010C /* AuthViewController.swift */; };
 		E97273D326876F15003D010C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E97273D226876F15003D010C /* Assets.xcassets */; };
 		E97273D626876F15003D010C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E97273D426876F15003D010C /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		13F6CB365D5D0FB2F7BAD86C /* Pods-VKNewsFeed.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKNewsFeed.debug.xcconfig"; path = "Target Support Files/Pods-VKNewsFeed/Pods-VKNewsFeed.debug.xcconfig"; sourceTree = "<group>"; };
+		9392B4B0A450216B43716252 /* Pods-VKNewsFeed.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKNewsFeed.release.xcconfig"; path = "Target Support Files/Pods-VKNewsFeed/Pods-VKNewsFeed.release.xcconfig"; sourceTree = "<group>"; };
+		CF21063D6212C622CD8B47E8 /* Pods_VKNewsFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VKNewsFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E951D3C126879664003C883A /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		E97273C626876F13003D010C /* VKNewsFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKNewsFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E97273C926876F13003D010C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E97273CB26876F13003D010C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		E97273CD26876F13003D010C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		E97273D026876F13003D010C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E97273CD26876F13003D010C /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		E97273D226876F15003D010C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E97273D526876F15003D010C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E97273D726876F15003D010C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -31,17 +35,45 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C3153FEFAD36F680E0061F1 /* Pods_VKNewsFeed.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5F6C838CAFEF256C0798482D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CF21063D6212C622CD8B47E8 /* Pods_VKNewsFeed.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D28ADA3B6CC1E624A0E96FC1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				13F6CB365D5D0FB2F7BAD86C /* Pods-VKNewsFeed.debug.xcconfig */,
+				9392B4B0A450216B43716252 /* Pods-VKNewsFeed.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		E951D3C326879669003C883A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E951D3C126879664003C883A /* AuthenticationService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		E97273BD26876F13003D010C = {
 			isa = PBXGroup;
 			children = (
 				E97273C826876F13003D010C /* VKNewsFeed */,
 				E97273C726876F13003D010C /* Products */,
+				D28ADA3B6CC1E624A0E96FC1 /* Pods */,
+				5F6C838CAFEF256C0798482D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,8 +90,8 @@
 			children = (
 				E97273C926876F13003D010C /* AppDelegate.swift */,
 				E97273CB26876F13003D010C /* SceneDelegate.swift */,
-				E97273CD26876F13003D010C /* ViewController.swift */,
-				E97273CF26876F13003D010C /* Main.storyboard */,
+				E97273CD26876F13003D010C /* AuthViewController.swift */,
+				E951D3C326879669003C883A /* Services */,
 				E97273D226876F15003D010C /* Assets.xcassets */,
 				E97273D426876F15003D010C /* LaunchScreen.storyboard */,
 				E97273D726876F15003D010C /* Info.plist */,
@@ -74,9 +106,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E97273DA26876F15003D010C /* Build configuration list for PBXNativeTarget "VKNewsFeed" */;
 			buildPhases = (
+				E0172053C96AED841CF53F95 /* [CP] Check Pods Manifest.lock */,
 				E97273C226876F13003D010C /* Sources */,
 				E97273C326876F13003D010C /* Frameworks */,
 				E97273C426876F13003D010C /* Resources */,
+				A8FE24B7800F9AF02DAB0479 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -126,34 +160,68 @@
 			files = (
 				E97273D626876F15003D010C /* LaunchScreen.storyboard in Resources */,
 				E97273D326876F15003D010C /* Assets.xcassets in Resources */,
-				E97273D126876F13003D010C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A8FE24B7800F9AF02DAB0479 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VKNewsFeed/Pods-VKNewsFeed-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VKNewsFeed/Pods-VKNewsFeed-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VKNewsFeed/Pods-VKNewsFeed-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E0172053C96AED841CF53F95 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VKNewsFeed-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E97273C226876F13003D010C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E97273CE26876F13003D010C /* ViewController.swift in Sources */,
+				E97273CE26876F13003D010C /* AuthViewController.swift in Sources */,
 				E97273CA26876F13003D010C /* AppDelegate.swift in Sources */,
 				E97273CC26876F13003D010C /* SceneDelegate.swift in Sources */,
+				E951D3C226879664003C883A /* AuthenticationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		E97273CF26876F13003D010C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E97273D026876F13003D010C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		E97273D426876F15003D010C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -283,6 +351,7 @@
 		};
 		E97273DB26876F15003D010C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 13F6CB365D5D0FB2F7BAD86C /* Pods-VKNewsFeed.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -301,6 +370,7 @@
 		};
 		E97273DC26876F15003D010C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9392B4B0A450216B43716252 /* Pods-VKNewsFeed.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
