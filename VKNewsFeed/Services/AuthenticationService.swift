@@ -40,7 +40,7 @@ class AuthenticationService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
     func wakeUpSession() {
         
         // Права доступа - что будем получать по API
-        let scope = ["offline"]
+        let scope = ["offline", "photos", "wall", "friends"]
         VKSdk.wakeUpSession(scope) { [delegate] state, error in
             switch state {
             case .initialized:
@@ -55,6 +55,11 @@ class AuthenticationService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
     
     // MARK: - Delegate
     weak var delegate: AuthServiceDelegate?
+    
+    
+    var token: String? {
+        return VKSdk.accessToken().accessToken
+    }
     
     // MARK: - VKSdkDelegate, VKSdkUIDelegate
     

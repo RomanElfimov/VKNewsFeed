@@ -12,6 +12,10 @@
 		E951D3C526879A0C003C883A /* AuthViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E951D3C426879A0C003C883A /* AuthViewController.storyboard */; };
 		E951D3C72687AD16003C883A /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E951D3C62687AD16003C883A /* FeedViewController.swift */; };
 		E951D3C92687AD27003C883A /* FeedViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E951D3C82687AD27003C883A /* FeedViewController.storyboard */; };
+		E951D3CD2687B08E003C883A /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E951D3CC2687B08E003C883A /* NetworkService.swift */; };
+		E951D3CF26885541003C883A /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = E951D3CE26885541003C883A /* API.swift */; };
+		E951D3D326888816003C883A /* FeedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E951D3D226888816003C883A /* FeedResponse.swift */; };
+		E951D3D526888990003C883A /* NetworkDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = E951D3D426888990003C883A /* NetworkDataFetcher.swift */; };
 		E97273CA26876F13003D010C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97273C926876F13003D010C /* AppDelegate.swift */; };
 		E97273CC26876F13003D010C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97273CB26876F13003D010C /* SceneDelegate.swift */; };
 		E97273CE26876F13003D010C /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97273CD26876F13003D010C /* AuthViewController.swift */; };
@@ -27,6 +31,10 @@
 		E951D3C426879A0C003C883A /* AuthViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AuthViewController.storyboard; sourceTree = "<group>"; };
 		E951D3C62687AD16003C883A /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		E951D3C82687AD27003C883A /* FeedViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FeedViewController.storyboard; sourceTree = "<group>"; };
+		E951D3CC2687B08E003C883A /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		E951D3CE26885541003C883A /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		E951D3D226888816003C883A /* FeedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedResponse.swift; sourceTree = "<group>"; };
+		E951D3D426888990003C883A /* NetworkDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcher.swift; sourceTree = "<group>"; };
 		E97273C626876F13003D010C /* VKNewsFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKNewsFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E97273C926876F13003D010C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E97273CB26876F13003D010C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				E951D3C126879664003C883A /* AuthenticationService.swift */,
+				E951D3D0268857F4003C883A /* NetworkLayer */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -89,6 +98,24 @@
 				E951D3C426879A0C003C883A /* AuthViewController.storyboard */,
 			);
 			path = AuthViewController;
+			sourceTree = "<group>";
+		};
+		E951D3D0268857F4003C883A /* NetworkLayer */ = {
+			isa = PBXGroup;
+			children = (
+				E951D3CC2687B08E003C883A /* NetworkService.swift */,
+				E951D3D426888990003C883A /* NetworkDataFetcher.swift */,
+				E951D3CE26885541003C883A /* API.swift */,
+			);
+			path = NetworkLayer;
+			sourceTree = "<group>";
+		};
+		E951D3D1268887FE003C883A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E951D3D226888816003C883A /* FeedResponse.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		E97273BD26876F13003D010C = {
@@ -114,6 +141,7 @@
 			children = (
 				E97273C926876F13003D010C /* AppDelegate.swift */,
 				E97273CB26876F13003D010C /* SceneDelegate.swift */,
+				E951D3D1268887FE003C883A /* Models */,
 				E951D3CB2687AD79003C883A /* AuthViewController */,
 				E951D3CA2687AD69003C883A /* FeedViewController */,
 				E951D3C326879669003C883A /* Services */,
@@ -239,11 +267,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E951D3D326888816003C883A /* FeedResponse.swift in Sources */,
 				E97273CE26876F13003D010C /* AuthViewController.swift in Sources */,
 				E97273CA26876F13003D010C /* AppDelegate.swift in Sources */,
 				E951D3C72687AD16003C883A /* FeedViewController.swift in Sources */,
 				E97273CC26876F13003D010C /* SceneDelegate.swift in Sources */,
+				E951D3CD2687B08E003C883A /* NetworkService.swift in Sources */,
+				E951D3D526888990003C883A /* NetworkDataFetcher.swift in Sources */,
 				E951D3C226879664003C883A /* AuthenticationService.swift in Sources */,
+				E951D3CF26885541003C883A /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
