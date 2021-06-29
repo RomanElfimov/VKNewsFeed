@@ -32,7 +32,9 @@ class NewsFeedInteractor: NewsFeedBusinessLogic {
         case .getNewsFeed:
             
             dataFetcher.getFeed { [weak self] feedResponse in
-        
+                
+                print("feed response \(feedResponse)")
+                
                 guard let feedResponse = feedResponse else { return }
                 self?.presenter?.presentData(response: .presentNewsFeed(feed: feedResponse))
             }

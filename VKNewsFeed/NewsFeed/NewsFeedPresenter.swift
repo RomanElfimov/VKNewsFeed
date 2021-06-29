@@ -33,6 +33,8 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
        
         case .presentNewsFeed(let feed):
             
+            print("presenting data \(feed)")
+            
             let cells = feed.items.map { feedItem in
                 cellViewModel(feedItem: feedItem, profiles: feed.profiles, groups: feed.groups)
             }
