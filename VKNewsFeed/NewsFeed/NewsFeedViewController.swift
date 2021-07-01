@@ -28,6 +28,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     // MARK: - Outlet
     
     @IBOutlet weak var tableView: UITableView!
+    private var titleView = TitleView()
     
     // MARK: Setup
     
@@ -53,15 +54,18 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         super.viewDidLoad()
         
         setup()
+        setupTopBars()
     
-//        tableView.register(UINib(nibName: "NewsFeedCell", bundle: nil), forCellReuseIdentifier: NewsFeedCell.reuseId)
+        tableView.register(UINib(nibName: "NewsFeedCell", bundle: nil), forCellReuseIdentifier: NewsFeedCell.reuseId)
         tableView.register(NewsFeedCodeCell.self, forCellReuseIdentifier: NewsFeedCodeCell.reuseId)
         tableView.separatorStyle = .none
         tableView.backgroundColor = .clear
         view.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         
         interactor?.makeRequest(request: .getNewsFeed)
+        interactor?.makeRequest(request: .getUser)
     }
+
     
     func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData) {
         
@@ -71,7 +75,19 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
             self.feedViewModel = feedViewModel
             
             tableView.reloadData()
+            
+        case .displayUser(let userViewModel):
+            titleView.set(userViewModel: userViewModel)
         }
+    }
+    
+    
+    private func setupTopBars() {
+        // При пролистывании view скрывается
+        self.navigationController?.hidesBarsOnSwipe = true
+        
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationItem.titleView = titleView
     }
     
 }
@@ -91,6 +107,7 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cellViewModel = feedViewModel.cells[indexPath.row]
         cell.set(viewModel: cellViewModel)
+        cell.delegate = self
         
         return cell
     }
@@ -100,5 +117,26 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cellViewModel = feedViewModel.cells[indexPath.row]
         return cellViewModel.sizes.totalHeight
+    }
+    
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        let cellViewModel = feedViewModel.cells[indexPath.row]
+        return cellViewModel.sizes.totalHeight
+    }
+}
+
+
+
+// MARK: - NewsFeedCodeCellDelegate Protocol
+
+extension NewsFeedViewController: NewsFeedCodeCellDelegate {
+
+    func revealPost(for cell: NewsFeedCodeCell) {
+        
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let cellViewModel = feedViewModel.cells[indexPath.row]
+        
+        interactor?.makeRequest(request: .revealPostIds(postId: cellViewModel.postId))
     }
 }

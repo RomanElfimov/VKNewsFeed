@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -138,25 +139,52 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vma-dG-Wl2">
+                                <rect key="frame" x="69" y="63" width="161" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Показать полностью..."/>
+                                <connections>
+                                    <action selector="moreTextButtonTapped:" destination="yaA-yk-ynV" eventType="touchUpInside" id="0FV-1Y-exV"/>
+                                </connections>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="9dg-51-7Ad" customClass="GalleryCollectionView" customModule="VKNewsFeed" customModuleProvider="target">
+                                <rect key="frame" x="59" y="52" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nSM-Wf-hhc">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                        </accessibility>
                     </view>
                 </subviews>
             </tableViewCellContentView>
+            <accessibility key="accessibilityConfiguration">
+                <accessibilityTraits key="traits" notEnabled="YES"/>
+            </accessibility>
             <connections>
                 <outlet property="bottomView" destination="zDm-0q-w6P" id="11i-Cg-yQ1"/>
                 <outlet property="cardView" destination="b0C-tS-o2R" id="31t-zc-hqa"/>
                 <outlet property="commentsLabel" destination="UzA-B4-H5k" id="DfX-UE-dIC"/>
                 <outlet property="dateLabel" destination="Ddc-bz-B45" id="ajV-3Y-7Pa"/>
+                <outlet property="galleryCollectionView" destination="9dg-51-7Ad" id="XHX-dB-GnM"/>
                 <outlet property="iconImageView" destination="zXU-0Q-urb" id="rVo-eR-ZpN"/>
                 <outlet property="likesLabel" destination="6D2-QS-LDg" id="FKR-uD-1IF"/>
+                <outlet property="moreTextButton" destination="Vma-dG-Wl2" id="Oq3-it-jda"/>
                 <outlet property="nameLabel" destination="FkV-n9-v4G" id="e2I-gR-m0I"/>
                 <outlet property="postImageView" destination="nKB-bl-HLK" id="pzA-em-dw6"/>
                 <outlet property="postLabel" destination="vF0-Ja-jr4" id="Nkz-5o-2um"/>
                 <outlet property="sharesLabel" destination="yUN-8s-s7k" id="ilb-s5-lIT"/>
                 <outlet property="viewsLabel" destination="8mK-3o-H3s" id="USL-zs-yZJ"/>
             </connections>
-            <point key="canvasLocation" x="-127.2" y="179.91004497751126"/>
+            <point key="canvasLocation" x="-128.2608695652174" y="179.46428571428569"/>
         </tableViewCell>
     </objects>
     <resources>
@@ -164,5 +192,8 @@
         <image name="eye" width="20" height="20"/>
         <image name="like" width="24" height="24"/>
         <image name="share" width="24" height="24"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

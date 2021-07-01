@@ -5,13 +5,21 @@
 //  Created by Роман Елфимов on 29.06.2021.
 //
 
-import UIKit // мой код
+import UIKit
+
+// Делегат для кнопки "Показать больше"
+protocol NewsFeedCodeCellDelegate: class {
+    func revealPost(for cell: NewsFeedCodeCell)
+}
 
 final class NewsFeedCodeCell: UITableViewCell {
     
-    // MARK: - ReuseId Singleton
-    
+    // MARK: - ReuseId Singleto
     static let reuseId = "NewsFeedCodeCell"
+    
+    
+    // MARK: - Delegate
+    weak var delegate: NewsFeedCodeCellDelegate?
     
     // MARK: - Properties
     
@@ -50,6 +58,18 @@ final class NewsFeedCodeCell: UITableViewCell {
         return view
     }()
     
+    // Кнопка "показать больше"
+    let moreTextButton: UIButton = {
+       let button = UIButton()
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        button.setTitleColor(#colorLiteral(red: 0.4012392163, green: 0.6231879592, blue: 0.8316264749, alpha: 1), for: .normal)
+        button.contentHorizontalAlignment = .left
+        button.contentVerticalAlignment = .center
+        button.setTitle("Показать полностью...", for: .normal)
+        return button
+    }()
+    
+    let galleryCollectionView = GalleryCollectionView()
     
     // Третий слой на topView
     let iconImageView: WebImageView = {
@@ -167,17 +187,30 @@ final class NewsFeedCodeCell: UITableViewCell {
         return label
     }()
     
+
+    // MARK: - Prepare For Reuse
+    override func prepareForReuse() {
+        iconImageView.set(imageUrl: nil)
+        postImageView.set(imageUrl: nil)
+        
+        contentView.isUserInteractionEnabled = false
+    }
     
     // MARK: - Initializers
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        iconImageView.layer.cornerRadius = Constants.topViewHeight / 2
+        iconImageView.clipsToBounds = true
+        
         backgroundColor = .clear
         selectionStyle = .none
         
         cardView.layer.cornerRadius = 10
         cardView.clipsToBounds = true
+        
+        moreTextButton.addTarget(self, action: #selector(moreTextButtonTouch), for: .touchUpInside)
         
         overlayFourthLayerOnBottomViewViews() // четвертый слой на bottomView
         overlayThirdLayerOnBottomView() // третий слой на bottomView
@@ -186,6 +219,14 @@ final class NewsFeedCodeCell: UITableViewCell {
         overlayFirstLayer() // первый слой
     }
     
+    
+    // MARK: - Selector
+    
+    @objc func moreTextButtonTouch() {
+        delegate?.revealPost(for: self)
+        
+        print("uhuhuihiuh")
+    }
     
     // MARK: - Constraints Setup
     
@@ -294,6 +335,9 @@ final class NewsFeedCodeCell: UITableViewCell {
         cardView.addSubview(postImageView)
         cardView.addSubview(bottomView)
         
+        cardView.addSubview(galleryCollectionView)
+        cardView.addSubview(moreTextButton)
+        
         // topView constraints
         topView.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 8).isActive = true
         topView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -8).isActive = true
@@ -315,6 +359,8 @@ final class NewsFeedCodeCell: UITableViewCell {
     
     func set(viewModel: FeedCellViewModel) {
         
+//        cardView.isUserInteractionEnabled = true
+        
         iconImageView.set(imageUrl: viewModel.iconUrlString)
         nameLabel.text = viewModel.name
         dateLabel.text = viewModel.date
@@ -325,14 +371,24 @@ final class NewsFeedCodeCell: UITableViewCell {
         viewsLabel.text = viewModel.views
         
         postLabel.frame = viewModel.sizes.postLabelFrame
-        postImageView.frame = viewModel.sizes.attachmentFrame
+        
         bottomView.frame = viewModel.sizes.bottomViewFrame
-      
-        if let photoAttachment = viewModel.photoAttachment {
+        
+        moreTextButton.frame = viewModel.sizes.moreTextButtonFrame
+        
+        if let photoAttachment = viewModel.photoAttachments.first, viewModel.photoAttachments.count == 1 {
             postImageView.set(imageUrl: photoAttachment.photUrlString)
             postImageView.isHidden = false
+            galleryCollectionView.isHidden = true
+            postImageView.frame = viewModel.sizes.attachmentFrame
+        } else if viewModel.photoAttachments.count > 1 {
+            galleryCollectionView.frame = viewModel.sizes.attachmentFrame
+            postImageView.isHidden = true
+            galleryCollectionView.isHidden = false
+            galleryCollectionView.set(photos: viewModel.photoAttachments)
         } else {
             postImageView.isHidden = true
+            galleryCollectionView.isHidden = true
         }
     }
     

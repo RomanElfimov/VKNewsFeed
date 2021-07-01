@@ -61,6 +61,10 @@ class AuthenticationService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
         return VKSdk.accessToken().accessToken
     }
     
+    var userId: String? {
+        return VKSdk.accessToken().userId
+    }
+    
     // MARK: - VKSdkDelegate, VKSdkUIDelegate
     
     func vkSdkAccessAuthorizationFinished(with result: VKAuthorizationResult!) {
