@@ -20,13 +20,9 @@ class NewsFeedInteractor: NewsFeedBusinessLogic {
     var service: NewsFeedService?
     
     
-    // MARK: - Internal Properties
-    private var revealPostIds = [Int]()
-    private var feedResponse: FeedResponse?
-    
-    private let dataFetcher: DataFetcher = NetworkDataFethcer(networking: NetworkService())
     
     func makeRequest(request: NewsFeed.Model.Request.RequestType) {
+        
         if service == nil {
             service = NewsFeedService()
         }
@@ -34,25 +30,31 @@ class NewsFeedInteractor: NewsFeedBusinessLogic {
         switch request {
         case .getNewsFeed:
             
-            dataFetcher.getFeed { [weak self] feedResponse in
-                
-                self?.feedResponse = feedResponse
-                self?.presentFeed()
-            }
-        case .revealPostIds(postId: let postId):
-            revealPostIds.append(postId)
-            presentFeed()
+            service?.getFeed(completion: { [weak self] revealPostIds, feed in
+                self?.presenter?.presentData(response: .presentNewsFeed(feed: feed, revealPostIds: revealPostIds))
+            })
+            
         case .getUser:
-            dataFetcher.getUser { [weak self] userResponse in
-                self?.presenter?.presentData(response: .presentUserInfo(user: userResponse))
-            }
+            
+            service?.getUser(completion: { [weak self] user in
+                self?.presenter?.presentData(response: .presentUserInfo(user: user))
+            })
+            
+        case .revealPostIds(postId: let postId):
+            
+            service?.revealPostIds(forPostId: postId, completion: { [weak self] revealPostIds, feed in
+                self?.presenter?.presentData(response: .presentNewsFeed(feed: feed, revealPostIds: revealPostIds))
+            })
+            
+        case .getNextBatch:
+            print("123")
+            
+            self.presenter?.presentData(response: .presentFooterLoader)
+            service?.getNextBatch(completion: { [weak self] (revealPostIds, feed) in
+                self?.presenter?.presentData(response: .presentNewsFeed(feed: feed, revealPostIds: revealPostIds))
+            })
+            
         }
-    }
-    
-    
-    private func presentFeed() {
-        guard let feedResponse = feedResponse else { return }
-        presenter?.presentData(response: .presentNewsFeed(feed: feedResponse, revealPostIds: revealPostIds))
     }
     
 }

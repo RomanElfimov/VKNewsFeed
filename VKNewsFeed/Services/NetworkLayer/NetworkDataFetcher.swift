@@ -8,7 +8,7 @@
 import Foundation
 
 protocol DataFetcher {
-    func getFeed(response: @escaping (FeedResponse?) -> Void)
+    func getFeed(nextBatchFrom: String?, response: @escaping (FeedResponse?) -> Void)
     func getUser(response: @escaping (UserResponse?) -> Void)
 }
 
@@ -24,9 +24,12 @@ struct NetworkDataFethcer: DataFetcher {
     }
     
     
-    func getFeed(response: @escaping (FeedResponse?) -> Void) {
+    func getFeed(nextBatchFrom: String?, response: @escaping (FeedResponse?) -> Void) {
         
-        let params = ["filters": "posts, photos"]
+        var params = ["filters": "posts, photos"]
+        
+        params["start_from"] = nextBatchFrom
+        
         networking.request(path: API.newsFeed, params: params) { data, error in
         
             

@@ -23,12 +23,21 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     
     // MARK: - Internal Properties
     
-    private var feedViewModel = FeedViewModel.init(cells: []) // модель данных для новостной ленты - это массив
+    private var feedViewModel = FeedViewModel.init(cells: [], footerTitle: nil) // модель данных для новостной ленты - это массив
     
     // MARK: - Outlet
     
     @IBOutlet weak var tableView: UITableView!
+   
     private var titleView = TitleView()
+    
+    private lazy var footerView = FooterView()
+    
+    private var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        return refreshControl
+    }()
     
     // MARK: Setup
     
@@ -55,11 +64,8 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         
         setup()
         setupTopBars()
-    
-        tableView.register(UINib(nibName: "NewsFeedCell", bundle: nil), forCellReuseIdentifier: NewsFeedCell.reuseId)
-        tableView.register(NewsFeedCodeCell.self, forCellReuseIdentifier: NewsFeedCodeCell.reuseId)
-        tableView.separatorStyle = .none
-        tableView.backgroundColor = .clear
+        setupTableView()
+        
         view.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         
         interactor?.makeRequest(request: .getNewsFeed)
@@ -74,11 +80,35 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         case .dispayNewsFeed(let feedViewModel):
             self.feedViewModel = feedViewModel
             
+            footerView.setTitle(title: feedViewModel.footerTitle)
             tableView.reloadData()
+            refreshControl.endRefreshing()
             
         case .displayUser(let userViewModel):
             titleView.set(userViewModel: userViewModel)
+            
+        case .displayFooterLoader:
+            footerView.showLoader()
+            
         }
+    }
+    
+    
+    private func setupTableView() {
+        
+        let topInset: CGFloat = 8
+        tableView.contentInset.top = topInset
+        
+        tableView.register(UINib(nibName: "NewsFeedCell", bundle: nil), forCellReuseIdentifier: NewsFeedCell.reuseId)
+        tableView.register(NewsFeedCodeCell.self, forCellReuseIdentifier: NewsFeedCodeCell.reuseId)
+        
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = .clear
+        
+        tableView.addSubview(refreshControl)
+        
+        // footer view for loading previous posts
+        tableView.tableFooterView = footerView
     }
     
     
@@ -88,6 +118,22 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationItem.titleView = titleView
+    }
+    
+    
+    // Когда долистываем ленту до конца
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+       
+        if scrollView.contentOffset.y > scrollView.contentSize.height / 1.1 {
+            print("hello world")
+            interactor?.makeRequest(request: .getNextBatch)
+            
+        }
+    }
+    
+    // MARK: - Selector
+    @objc private func refresh() {
+        interactor?.makeRequest(request: .getNewsFeed)
     }
     
 }
