@@ -66,8 +66,6 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
         setupTopBars()
         setupTableView()
         
-        view.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-        
         interactor?.makeRequest(request: .getNewsFeed)
         interactor?.makeRequest(request: .getUser)
     }
@@ -113,6 +111,16 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     
     
     private func setupTopBars() {
+        
+        // topBar view, чтобы лента не залезала на верх
+        let topBar = UIView(frame: UIApplication.shared.statusBarFrame)
+        topBar.backgroundColor = .white
+        topBar.layer.shadowColor = UIColor.black.cgColor
+        topBar.layer.shadowOpacity = 0.3
+        topBar.layer.shadowOffset = CGSize.zero
+        topBar.layer.shadowRadius = 8
+        self.view.addSubview(topBar)
+        
         // При пролистывании view скрывается
         self.navigationController?.hidesBarsOnSwipe = true
         
@@ -124,7 +132,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
     // Когда долистываем ленту до конца
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
        
-        if scrollView.contentOffset.y > scrollView.contentSize.height / 1.1 {
+        if scrollView.contentOffset.y > scrollView.contentSize.height / 1.1  {
             print("hello world")
             interactor?.makeRequest(request: .getNextBatch)
             

@@ -43,6 +43,7 @@
 		E9FC888D268DEC2E00C97724 /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FC888C268DEC2E00C97724 /* UserResponse.swift */; };
 		E9FC8890268F06AA00C97724 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FC888F268F06A900C97724 /* FooterView.swift */; };
 		E9FC8892268F0A9100C97724 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = E9FC8891268F0A9100C97724 /* Localizable.stringsdict */; };
+		E9FC8894268F0F5600C97724 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FC8893268F0F5600C97724 /* GradientView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,7 @@
 		E9FC888C268DEC2E00C97724 /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		E9FC888F268F06A900C97724 /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
 		E9FC8891268F0A9100C97724 /* Localizable.stringsdict */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
+		E9FC8893268F0F5600C97724 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +225,7 @@
 				E9D55AEC268A103A00733136 /* WebImageView.swift */,
 				E9D55AF2268B265F00733136 /* String+Height.swift */,
 				E9D55AF7268B54F800733136 /* Constraints.swift */,
+				E9FC8893268F0F5600C97724 /* GradientView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 			files = (
 				E951D3D326888816003C883A /* FeedResponse.swift in Sources */,
 				E97CEA3B268CA05D00ECC2BD /* GalleryCollectionViewCell.swift in Sources */,
+				E9FC8894268F0F5600C97724 /* GradientView.swift in Sources */,
 				E9D55AFA268B5AE000733136 /* Constants.swift in Sources */,
 				E97CEA39268C9EC500ECC2BD /* GalleryCollectionView.swift in Sources */,
 				E9D55AF8268B54F800733136 /* Constraints.swift in Sources */,
